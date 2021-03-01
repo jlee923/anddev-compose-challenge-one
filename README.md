@@ -9,7 +9,7 @@ For when you need a little pup-me-up in your day, check out pictures of these ad
 
 ## :bulb: Motivation and Context
 My primary goal of this project was to explore how compose handled lists and nested elements, which
-I was happy learn to build in this sample project.  
+I was happy to learn to build in this sample project.
 I'm content seeing this fully working compose UI display a list of puppies.  Also, it was a nice
 bonus points to see Navigation working with compose, too.
 

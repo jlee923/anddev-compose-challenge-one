@@ -21,7 +21,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.MaterialTheme
@@ -37,9 +44,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavType
-import androidx.navigation.compose.*
-import com.jlee.anddevcomposechallenge1.PUPPY_LIST
-import com.jlee.anddevcomposechallenge1.PuppyDetail
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import com.jlee.anddevcomposechallenge1.ui.theme.MyTheme
 import com.jlee.anddevcomposechallenge1.ui.theme.shapes
 
@@ -58,9 +67,10 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp() {
     val navController = rememberNavController()
-    NavHost(navController, startDestination="puppyList") {
+    NavHost(navController, startDestination = "puppyList") {
         composable("puppyList") { PuppyListHome(navController) }
-        composable("puppyDetail/{puppyId}",
+        composable(
+            "puppyDetail/{puppyId}",
             arguments = listOf(navArgument("puppyId") { type = NavType.IntType })
         ) { backStackEntry ->
             PuppyDetailHome(navController, backStackEntry.arguments?.getInt("puppyId"))
@@ -79,7 +89,7 @@ fun PuppyListHome(navController: NavController) {
 
 @Composable
 fun PuppyList(navController: NavController, puppyList: List<PuppyDetail>) {
-    Column (
+    Column(
         modifier = Modifier.padding(horizontal = 16.dp, vertical = 0.dp)
     ) {
         Text(
@@ -119,7 +129,7 @@ fun PuppyContent(navController: NavController, puppyDetail: PuppyDetail, puppyId
                 color = Color(0xFFFFFFFF),
                 shape = shapes.medium
             )
-            .clickable { navController.navigate("puppyDetail/${puppyId}") }
+            .clickable { navController.navigate("puppyDetail/$puppyId") }
     ) {
         Spacer(modifier = Modifier.height(16.dp))
         Image(
